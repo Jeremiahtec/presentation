@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadster: Body, Soul & Spirit (Infographics Show Style)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #020617; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Smooth accordion expanding */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 1200px;
+            opacity: 1;
+        }
+        
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.3); border-radius: 10px; }
+    </style>
+</head>
+<body class="text-white min-h-screen p-4 md:p-8 font-sans selection:bg-emerald-500/30 pb-20">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <div class="mb-10 text-center relative">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-3 uppercase">
+                <span class="text-white">Mechatronics &</span> 
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-yellow-400">Demographics</span>
+            </h1>
+            <p class="text-slate-400 font-bold tracking-widest uppercase text-sm">Tap a section to expand the infographic</p>
+        </div>
+
+        <div id="accordion-container" class="space-y-4">
+            <!-- Content injected via JS -->
+        </div>
+
+    </div>
+
+    <script>
+        // Custom Inline SVG Vector Illustrations to match "The Infographics Show" Style
+        const sections = [
+            {
+                title: "The Hook: Deconstructing the Magic",
+                subtitle: "Stripping away the sci-fi illusion",
+                themeColor: "text-red-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Screens -->
+                    <rect x="200" y="80" width="180" height="130" rx="8" fill="#1e293b"/>
+                    <rect x="210" y="90" width="160" height="110" rx="4" fill="#020617"/>
+                    <!-- Pulse Graph -->
+                    <path d="M 210 160 L 250 160 L 265 110 L 285 180 L 300 80 L 320 160 L 370 160" fill="none" stroke="#ef4444" stroke-width="6" stroke-linejoin="round"/>
+                    <path d="M 210 160 L 250 160 L 265 110 L 285 180 L 300 80 L 320 160 L 370 160" fill="none" stroke="#fef08a" stroke-width="2" stroke-linejoin="round"/>
+                    <!-- Character Base -->
+                    <path d="M 40 300 C 40 240 160 240 160 300 Z" fill="#e2e8f0"/>
+                    <path d="M 100 240 L 100 300" stroke="#1d4ed8" stroke-width="8"/> 
+                    <!-- Head -->
+                    <circle cx="100" cy="180" r="45" fill="#fcd34d"/>
+                    <path d="M 60 150 C 60 120 140 120 140 150" fill="#b45309"/> 
+                    <!-- Glasses -->
+                    <circle cx="80" cy="175" r="18" fill="none" stroke="#fff" stroke-width="4"/>
+                    <circle cx="125" cy="175" r="18" fill="none" stroke="#fff" stroke-width="4"/>
+                    <line x1="98" y1="175" x2="107" y2="175" stroke="#fff" stroke-width="4"/>
+                    <!-- Eyes & Mouth (Shocked) -->
+                    <circle cx="80" cy="175" r="5" fill="#000"/>
+                    <circle cx="125" cy="175" r="5" fill="#000"/>
+                    <ellipse cx="105" cy="205" rx="10" ry="16" fill="#000"/>
+                    <!-- Bold Text Banner -->
+                    <text x="200" y="50" font-family="system-ui, sans-serif" font-weight="900" font-size="36" fill="#fff" text-anchor="middle" letter-spacing="2">THEY ARE BACK</text>
+                </svg>`,
+                nodes: [
+                    { title: "The Event", text: "Tesla unveiled a Roadster capable of mid-air flips and hovering using SpaceX tech." },
+                    { title: "The Reality", text: "It looks like sci-fi magic, but as engineers, we know it's just pure, violent physics." },
+                    { title: "The Framework", text: "We demystify this marvel by breaking it down into three parts: The Body, The Soul, and The Spirit." }
+                ]
+            },
+            {
+                title: "The Body: The Hardware",
+                subtitle: "The physical shell and pneumatic muscle",
+                themeColor: "text-emerald-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Glowing Ground -->
+                    <ellipse cx="200" cy="240" rx="140" ry="20" fill="#10b981" opacity="0.3"/>
+                    <!-- Car Silhouette -->
+                    <path d="M 60 180 L 120 120 L 240 120 L 340 180 L 360 220 L 40 220 Z" fill="#94a3b8"/>
+                    <path d="M 130 130 L 230 130 L 280 170 L 80 170 Z" fill="#020617"/>
+                    <!-- Thruster Blasts -->
+                    <polygon points="40,220 20,280 60,280" fill="#34d399"/>
+                    <polygon points="360,220 340,280 380,280" fill="#34d399"/>
+                    <polygon points="120,220 100,270 140,270" fill="#10b981"/>
+                    <polygon points="280,220 260,270 300,270" fill="#10b981"/>
+                    <!-- Text -->
+                    <text x="200" y="60" font-family="system-ui, sans-serif" font-weight="900" font-size="34" fill="#10b981" text-anchor="middle" letter-spacing="1">THE MUSCLE</text>
+                </svg>`,
+                nodes: [
+                    { title: "The Anatomy", text: "The car is the physical shell, housing 10 SpaceX-derived cold-gas thrusters around its perimeter." },
+                    { title: "The Muscle", text: "It relies on 600 liters of compressed air stored in extreme 10,000 psi pressure tanks." },
+                    { title: "The Breath", text: "An onboard electric compressor continuously refills the air tanks dynamically while driving." }
+                ]
+            },
+            {
+                title: "The Soul: Electronics & Code",
+                subtitle: "Where the physical world meets the digital mind",
+                themeColor: "text-blue-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Circuit Traces -->
+                    <path d="M 0 150 L 100 150 M 300 150 L 400 150 M 200 0 L 200 80 M 200 220 L 200 300" stroke="#3b82f6" stroke-width="12" stroke-dasharray="15 10"/>
+                    <path d="M 50 80 L 120 120 M 350 220 L 280 180" stroke="#60a5fa" stroke-width="6"/>
+                    <!-- Processor -->
+                    <rect x="120" y="90" width="160" height="120" rx="12" fill="#1e3a8a" stroke="#60a5fa" stroke-width="4"/>
+                    <rect x="140" y="110" width="120" height="80" rx="4" fill="#020617"/>
+                    <!-- Core Glow -->
+                    <circle cx="200" cy="150" r="20" fill="#3b82f6"/>
+                    <circle cx="200" cy="150" r="10" fill="#fff"/>
+                    <text x="200" y="50" font-family="system-ui, sans-serif" font-weight="900" font-size="34" fill="#60a5fa" text-anchor="middle" letter-spacing="1">REFLEXES</text>
+                </svg>`,
+                nodes: [
+                    { title: "Nervous System", text: "IMU sensors, accelerometers, and gyroscopes constantly read real-time spatial orientation." },
+                    { title: "Reflexes", text: "Low-level microcontrollers and embedded wiring instantly connect the digital mind to the pneumatic muscle." },
+                    { title: "Action", text: "Embedded code physically triggers the high-pressure actuators in milliseconds." }
+                ]
+            },
+            {
+                title: "The Spirit: High-Level Software",
+                subtitle: "The ghost in the machine",
+                themeColor: "text-purple-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Geometric Connections -->
+                    <line x1="120" y1="120" x2="280" y2="120" stroke="#c084fc" stroke-width="6"/>
+                    <line x1="120" y1="120" x2="200" y2="220" stroke="#a855f7" stroke-width="6"/>
+                    <line x1="280" y1="120" x2="200" y2="220" stroke="#a855f7" stroke-width="6"/>
+                    <line x1="200" y1="220" x2="200" y2="280" stroke="#9333ea" stroke-width="8"/>
+                    <!-- Data Nodes -->
+                    <circle cx="120" cy="120" r="25" fill="#d8b4fe"/>
+                    <circle cx="280" cy="120" r="25" fill="#d8b4fe"/>
+                    <circle cx="200" cy="220" r="35" fill="#a855f7"/>
+                    <circle cx="200" cy="220" r="15" fill="#fff"/>
+                    <text x="200" y="60" font-family="system-ui, sans-serif" font-weight="900" font-size="34" fill="#c084fc" text-anchor="middle" letter-spacing="1">ALGORITHMS</text>
+                </svg>`,
+                nodes: [
+                    { title: "Intelligence", text: "High-level algorithms, high-frequency telemetry handling, and complex sensor fusion logic." },
+                    { title: "Consciousness", text: "Computes pitch, yaw, roll, and spatial trajectory in real-time from massive data pipelines." },
+                    { title: "Command", text: "Decides exactly when, where, and how hard to fire thrusters to stabilize the vehicle in the air." }
+                ]
+            },
+            {
+                title: "The Demographic Advantage",
+                subtitle: "Why we are positioned to build this",
+                themeColor: "text-amber-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Rising Sun / Future -->
+                    <circle cx="200" cy="180" r="100" fill="#f59e0b" opacity="0.8"/>
+                    <!-- Crowd Silhouettes -->
+                    <path d="M 40 300 C 40 200 120 200 120 300 Z" fill="#1e293b"/>
+                    <circle cx="80" cy="180" r="30" fill="#1e293b"/>
+                    <path d="M 280 300 C 280 200 360 200 360 300 Z" fill="#1e293b"/>
+                    <circle cx="320" cy="180" r="30" fill="#1e293b"/>
+                    <!-- Leader Figure -->
+                    <path d="M 140 300 C 140 160 260 160 260 300 Z" fill="#334155"/>
+                    <circle cx="200" cy="140" r="40" fill="#334155"/>
+                    <text x="200" y="50" font-family="system-ui, sans-serif" font-weight="900" font-size="32" fill="#fbbf24" text-anchor="middle" letter-spacing="1">THE 28 MILLION</text>
+                </svg>`,
+                nodes: [
+                    { title: "Youth Wave", text: "Nigeria has a median age of 18.1. We hold one of the largest, youngest talent pools in the world." },
+                    { title: "Future Demand", text: "By 2030, the labor force will require an estimated 28 million digitally skilled tech workers." },
+                    { title: "Economic Shift", text: "Training this massive demographic beyond basic web dev into deep tech creates a global digital powerhouse." }
+                ]
+            },
+            {
+                title: "The SQI Translation",
+                subtitle: "Bringing the engineering home",
+                themeColor: "text-teal-400",
+                svg: `<svg viewBox="0 0 400 300" class="w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="300" fill="#0f172a"/>
+                    <!-- Digital Workspace Base -->
+                    <polygon points="80,240 320,240 380,280 20,280" fill="#334155"/>
+                    <rect x="120" y="160" width="160" height="80" rx="6" fill="#1e293b"/>
+                    <rect x="130" y="170" width="140" height="60" fill="#020617"/>
+                    <!-- Rocket Launching from Screen -->
+                    <path d="M 180 120 L 200 60 L 220 120 Z" fill="#2dd4bf"/>
+                    <rect x="180" y="120" width="40" height="60" fill="#14b8a6"/>
+                    <polygon points="180,180 200,240 220,180" fill="#fef08a"/>
+                    <polygon points="190,180 200,220 210,180" fill="#f97316"/>
+                    <text x="200" y="50" font-family="system-ui, sans-serif" font-weight="900" font-size="34" fill="#2dd4bf" text-anchor="middle" letter-spacing="1">BUILD IT HERE</text>
+                </svg>`,
+                nodes: [
+                    { title: "Current State", text: "The local tech ecosystem heavily dominates the 'Spirit' level: software, web apps, and fintech." },
+                    { title: "The Leap", text: "To solve local infrastructure challenges, we must master the 'Soul' and 'Body'—embedded systems and hardware." },
+                    { title: "The Proof", text: "Projects like ELMODE already prove we can extract, buffer, and process vehicle telemetry locally. We are already building the bridge." }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('accordion-container');
+
+        sections.forEach((section, index) => {
+            let nodesHtml = '';
+            section.nodes.forEach((node, i) => {
+                nodesHtml += `
+                    <div class="relative pl-8 pb-6 last:pb-0">
+                        ${i !== section.nodes.length - 1 ? `<div class="absolute left-2.5 top-8 w-0.5 h-full bg-slate-700/50"></div>` : ''}
+                        <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-slate-900 border-2 border-slate-600 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4 hover:bg-slate-800/60 transition-colors">
+                            <h4 class="font-bold ${section.themeColor} mb-1 tracking-wide uppercase text-xs">${node.title}</h4>
+                            <p class="text-slate-300 text-sm md:text-base leading-relaxed">${node.text}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const html = `
+                <div class="accordion-item glass-panel rounded-2xl overflow-hidden mb-4 border border-slate-700/50">
+                    <button class="w-full text-left px-6 py-5 flex items-center justify-between hover:bg-slate-800/60 transition-colors" onclick="toggleAccordion(${index})">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-white shadow-inner border border-slate-600">
+                                ${index + 1}
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white uppercase tracking-tight">${section.title}</h3>
+                                <p class="text-slate-400 text-sm mt-0.5 font-medium">${section.subtitle}</p>
+                            </div>
+                        </div>
+                        <svg class="w-8 h-8 text-slate-500 accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="accordion-content bg-[#0b1120] border-t border-slate-800/80">
+                        <div class="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start">
+                            
+                            <!-- Left: Pure SVG Illustration -->
+                            <div class="w-full md:w-5/12 shrink-0">
+                                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] border-2 border-slate-800 shadow-2xl bg-slate-900">
+                                    ${section.svg}
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Infographic Nodes -->
+                            <div class="w-full md:w-7/12 pt-2">
+                                ${nodesHtml}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += html;
+        });
+
+        function toggleAccordion(index) {
+            const items = document.querySelectorAll('.accordion-item');
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.toggle('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        setTimeout(() => {
+            toggleAccordion(0);
+        }, 300);
+    </script>
+</body>
+</html>
